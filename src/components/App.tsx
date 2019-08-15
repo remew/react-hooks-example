@@ -8,12 +8,12 @@ import ReactMemo from './ReactMemo';
 import ReactMemoWithComparator from './ReactMemoWithComparator';
 
 const components = [
-  {name: 'ComponentDidMount', component: ComponentDidMount, path: 'component-did-mount'},
-  {name: 'ComponentDidMountUpdate', component: ComponentDidMountUpdate, path: 'component-did-mount-update'},
-  {name: 'Timer', component: Timer, path: 'timer'},
-  {name: 'UseContext', component: UseContext, path: 'use-context'},
-  {name: 'ReactMemo', component: ReactMemo, path: 'react-memo'},
-  {name: 'ReactMemoWithComparator', component: ReactMemoWithComparator, path: 'react-memo-with-comparator'},
+  {name: 'ComponentDidMount', component: ComponentDidMount, path: 'component-did-mount', url: 'https://github.com/remew/react-hooks-example/blob/master/src/components/ComponentDidMount.tsx'},
+  {name: 'ComponentDidMountUpdate', component: ComponentDidMountUpdate, path: 'component-did-mount-update', url: 'https://github.com/remew/react-hooks-example/blob/master/src/components/ComponentDidMountUpdate.tsx'},
+  {name: 'Timer', component: Timer, path: 'timer', url: 'https://github.com/remew/react-hooks-example/blob/master/src/components/Timer.tsx'},
+  {name: 'UseContext', component: UseContext, path: 'use-context', url: 'https://github.com/remew/react-hooks-example/blob/master/src/components/UseContext.tsx'},
+  {name: 'ReactMemo', component: ReactMemo, path: 'react-memo', url: 'https://github.com/remew/react-hooks-example/blob/master/src/components/ReactMemo.tsx'},
+  {name: 'ReactMemoWithComparator', component: ReactMemoWithComparator, path: 'react-memo-with-comparator', url: 'https://github.com/remew/react-hooks-example/blob/master/src/components/ReactMemoWithComparator.tsx'},
 ];
 
 const App = () => {
@@ -36,9 +36,18 @@ const App = () => {
       </nav>
       <main>
         {
-          components.map(({path, component}) => {
+          components.map(({url, path, component: Component}) => {
             return (
-              <Route key={path} path={`/${path}`} component={component} />
+              <Route key={path} path={`/${path}`} component={() => {
+                return (
+                  <>
+                    <div>
+                      <a href={url} target={'_blank'} rel={'noopener'}>Source</a>
+                    </div>
+                    <Component />
+                  </>
+                );
+              }} />
             );
           })
         }
